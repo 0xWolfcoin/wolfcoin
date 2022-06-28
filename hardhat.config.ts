@@ -17,11 +17,11 @@ const config: HardhatUserConfig = {
   networks: {
     rinkeby: {
       url: process.env.RINKEBY_URL || "",
-      accounts: process.env.RINKEBY_PRIVATE_KEY !== undefined ? [process.env.RINKEBY_PRIVATE_KEY] : [],
+      accounts: process.env.RINKEBY_WALLET_PRIVATE_KEY !== undefined ? [process.env.RINKEBY_WALLET_PRIVATE_KEY] : [],
     },
     mainnet: {
       url: process.env.MAINNET_URL || "",
-      accounts: process.env.MAINNET_PRIVATE_KEY !== undefined ? [process.env.MAINNET_PRIVATE_KEY] : [],
+      accounts: process.env.MAINNET_WALLET_PRIVATE_KEY !== undefined ? [process.env.MAINNET_WALLET_PRIVATE_KEY] : [],
     }
   },
   gasReporter: {
