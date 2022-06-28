@@ -7,16 +7,13 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Wolfcoin is ERC20, Ownable {
     // Libaries —————————————————————————————————————————————————————
-
     using SafeMath for uint256;
 
     // Events ———————————————————————————————————————————————————————
-
     event WillClaim(address indexed claimant, uint256 amount);
     event DidClaim(address indexed claimant, uint256 amount);
 
-    // State ————————————————————————————————————————————————————————
-
+    // Constants ————————————————————————————————————————————————————
     // Aggregate supply in wei.
     uint256 private constant AGGREGATE_SUPPLY = 1_337_069_420_000e18;
     // Allocate 80% of the supply to the market.
@@ -27,17 +24,19 @@ contract Wolfcoin is ERC20, Ownable {
     uint256 private constant CLAIM_REDUCTION = 1e16; 
     // 1e20 represents dividing by 100 as a percentage.
     uint256 private constant CLAIM_DIVISOR = 1e20;
+
+    // Airdrop state ————————————————————————————————————————————————
     // List of addresses that have previously claimed the airdrop.
     mapping(address => bool) private claimed;
-    // 
+    // Represents the state of the airdrop (in/active).
     bool private isAirdropActive;
     // Allocate the remaining 20% supply to the airdrop.
     uint256 public airdropSupply = AGGREGATE_SUPPLY - MARKET_SUPPLY;
     // 1e18 represents 1% as the starting claim percentage.
     uint256 public claimRatio = 1e18;
 
-    constructor() ERC20("Wolfcoin", "WOLF") {
-        _mint(address(this), MARKET_SUPPLY);
+    constructor(address marketSupplyOwnerAddress) ERC20("Wolfcoin", "WOLF") {
+        _mint(marketSupplyOwnerAddress, MARKET_SUPPLY);
         _mint(address(this), airdropSupply);
         isAirdropActive = true;
     }

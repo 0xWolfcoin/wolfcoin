@@ -14,7 +14,8 @@ async function main() {
   // await hre.run('compile');
 
   const WolfcoinContractFactory = await ethers.getContractFactory("Wolfcoin");
-  const wolfcoinContract = await WolfcoinContractFactory.deploy();
+  const marketSupplyOwnerAddress = '0x8b39E8bca5C86cC9634F1A4Ee4E4CaEDE4cbd149';
+  const wolfcoinContract = await WolfcoinContractFactory.deploy(marketSupplyOwnerAddress);
   await wolfcoinContract.deployed();
   console.log("Wolfcoin contract deployed to:", wolfcoinContract.address);
 }
