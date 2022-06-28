@@ -19,7 +19,7 @@ describe("Airdrop claim", function () {
     [owner, addr1] = await ethers.getSigners()
     // To deploy our contract, we just have to call Token.deploy() and await
     // for it to be deployed(), which happens once its transaction has been mined.
-    wolfcoin = await WolfcoinContractFactory.deploy()
+    wolfcoin = await WolfcoinContractFactory.deploy(owner.address)
     await wolfcoin.deployed()
   })
 
@@ -58,10 +58,12 @@ describe("Airdrop claim", function () {
 
 describe("Airdrop percent", function () {
   let wolfcoin: Wolfcoin
+  let owner: SignerWithAddress
 
   beforeEach(async function () {
-    const WolfcoinContractFactory = await ethers.getContractFactory("Wolfcoin")
-    wolfcoin = await WolfcoinContractFactory.deploy()
+    const WolfcoinContractFactory = await ethers.getContractFactory("Wolfcoin");
+    [owner] = await ethers.getSigners()
+    wolfcoin = await WolfcoinContractFactory.deploy(owner.address)
     await wolfcoin.deployed()
   })
 
@@ -90,7 +92,7 @@ describe("Airdrop supply", function () {
   beforeEach(async function () {
     const WolfcoinContractFactory = await ethers.getContractFactory("Wolfcoin");
     [owner, addr1] = await ethers.getSigners()
-    wolfcoin = await WolfcoinContractFactory.deploy()
+    wolfcoin = await WolfcoinContractFactory.deploy(owner.address)
     await wolfcoin.deployed()
   })
 
@@ -128,7 +130,7 @@ describe("Airdrop simulation", function () {
   beforeEach(async function () {
     const WolfcoinContractFactory = await ethers.getContractFactory("Wolfcoin");
     [owner, addr1] = await ethers.getSigners()
-    wolfcoin = await WolfcoinContractFactory.deploy()
+    wolfcoin = await WolfcoinContractFactory.deploy(owner.address)
     await wolfcoin.deployed()
   })
 
